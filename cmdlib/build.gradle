@@ -1,0 +1,22 @@
+apply plugin: 'java'
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('libs/ddmlib.jar')
+    compile files('libs/chimpchat.jar')
+    compile files('libs/commons-beanutils-1.8.3.jar')
+}
+
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
+
+task makeJar(type: Copy) {
+    delete 'build/libs/cmdlib.jar'
+    from('build/libs/')
+    into('build/libs/')
+    include('cmdlib.jar')
+    rename ('cmdlib.jar', 'monkeycontroller.jar')
+}
+
+makeJar.dependsOn(build)
